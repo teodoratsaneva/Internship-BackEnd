@@ -4,8 +4,7 @@ namespace Expression
 {
     class Program
     {
-
-        void getMyName()
+        static void GetMyName()
         {
             string fname, lname, town;
             Console.Write("Enter your first name: ");
@@ -19,9 +18,9 @@ namespace Expression
             Console.WriteLine("You are {0} {1}, a {2}-years old person from {3}.", fname, lname, age, town);
         }
 
-        void doSquare()
+        static void DoSquare()
         {
-            var n = int.Parse(Console.ReadLine());
+           var n = int.Parse(Console.ReadLine());
             for(int i = 0; i < n; i++)
             {
                 if((i == 0 )|| (i ==n - 1))
@@ -44,23 +43,29 @@ namespace Expression
             }
         }
 
-        void convertToBool()
+        static void ConvertToBool()
         {
-                try
-                {
-                    string str = "kk";
-                    bool b = Convert.ToBoolean(str);
-                    Console.WriteLine(b);
-                }
-                catch (Exception)
-                {
-                    Console.WriteLine("The number could not be converted to a byte");
-                }
+            try
+            {
+                string str = "True";
+                bool b = Convert.ToBoolean(str);
+                Console.WriteLine(b);
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("The string could not be converted to a boolean");
+            }
         }
 
+        static void StudyHall()
+        {
+                double length = double.Parse(Console.ReadLine());
+                double width = double.Parse(Console.ReadLine());
+                
+        }
         static void Main(string[] args)
         {
-            
+            DoSquare();
         }
     }
 }
