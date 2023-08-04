@@ -4,36 +4,37 @@ namespace Expression
 {
     class Program
     {
-        static void GetMyName()
+        static void DisplayMyName()
         {
-            string fname, lname, town;
-
+            string firstName;
             Console.Write("Enter your first name: ");
-            fname = Console.ReadLine();
+            firstName = Console.ReadLine();
 
+            string secondName;
             Console.Write("Enter your last name: ");
-            lname = Console.ReadLine();
+            secondName = Console.ReadLine();
 
             Console.Write("Enter how old are you: ");
-            var age = int.Parse(Console.ReadLine());
+            int age = int.Parse(Console.ReadLine());
 
+            string town;
             Console.Write("Enter where you from: ");
             town = Console.ReadLine();
 
-            Console.WriteLine("You are {0} {1}, a {2}-years old person from {3}.", fname, lname, age, town);
+            Console.WriteLine("You are {0} {1}, a {2}-years old person from {3}.", firstName, secondName, age, town);
         }
 
-        static void DoSquare()
+        static void DisplaySquare()
         {
             Console.Write("Enter a number: ");
 
-            var n = int.Parse(Console.ReadLine());
+            int number = int.Parse(Console.ReadLine());
 
-            for (int i = 0; i < n; i++)
+            for (int i = 0; i < number; i++)
             {
-                if ((i == 0) || (i == n - 1))
+                if ((i == 0) || (i == number - 1))
                 {
-                    for (int j = 0; j < n; j++)
+                    for (int j = 0; j < number; j++)
                     {
                         Console.Write("*");
                     }
@@ -41,101 +42,126 @@ namespace Expression
                 else
                 {
                     Console.Write("*");
-                    for (int k = 0; k < n - 2; k++)
+
+                    for (int k = 0; k < number - 2; k++)
                     {
                         Console.Write(" ");
                     }
+
                     Console.Write("*");
                 }
+
                 Console.WriteLine();
             }
         }
 
-        static void OddOrEvenNumber()
+        static void DisplayIsOddOrEvenNumber()
         {
             Console.Write("Enter a number: ");
 
-            var num = int.Parse(Console.ReadLine());
+            int number = int.Parse(Console.ReadLine());
 
-            if (num % 2 == 0)
-                Console.WriteLine("even {0}", num);
-            else
-                Console.WriteLine("odd {0}", num);
+            Console.WriteLine(number % 2 == 0 ? "even " + number : "odd " + number);
         }
 
-        static void MoonGravity()
+        static void DisplayMoonGravity()
         {
             Console.Write("Enter a number: ");
 
-            var num = float.Parse(Console.ReadLine());
+            float number = float.Parse(Console.ReadLine());
+            const float gravitationalField = 0.17f;
 
-            Console.WriteLine(num * 0.17f);
+            Console.WriteLine(number * gravitationalField);
         }
 
-        static void DivideBy7And5()
+        static void DisplayIsNumberDivideBy7And5()
         {
             Console.Write("Enter a number: ");
 
-            var num = int.Parse(Console.ReadLine());
+            int number = int.Parse(Console.ReadLine());
 
-            if(num % 7 == 0 || num % 5 == 0)
-                Console.WriteLine("true {0}", num);
-            else
-                Console.WriteLine("false {0}", num);
+            const int firstDivisor = 7;
+            const int secondDivisor = 5;
+
+            Console.WriteLine(number % firstDivisor == 0 || number % secondDivisor == 0 ? "true " + number : "false " + number);
         }
 
-        static void Rectangles()
+        static void DisplayRectangleArea()
         {
             Console.Write("Enter a width of the rectangle: ");
-            var width = float.Parse(Console.ReadLine());
+            float width = float.Parse(Console.ReadLine());
 
             Console.Write("Enter a height of the rectangle: ");
-            var height = float.Parse(Console.ReadLine());
+            float height = float.Parse(Console.ReadLine());
 
-            Console.WriteLine(width*height + " " + (width*2 + height*2));
+            Console.WriteLine(width * height + " " + (width * 2 + height * 2));
         }
 
-        static void ThirdDigitCheck()
+        static void DisplayIsThirdDigitEqualTo7()
         {
             Console.Write("Enter a number: ");
-            var num = int.Parse(Console.ReadLine());
+            int number = int.Parse(Console.ReadLine());
 
-            int thirdDigit = (num / 100) % 10;
+            int thirdDigit = (number / 100) % 10;
+            const int digit = 7;
 
-            if (thirdDigit == 7)
-                Console.WriteLine("true");
-            else
-                Console.WriteLine("false " + thirdDigit);
+            Console.WriteLine(thirdDigit == digit ? "True" : ("False " + thirdDigit));
+        }
+
+        static int GetSumOfDigits(int number)
+        {
+            int sum = 0;
+
+            while(number != 0)
+            {
+                sum += number % 10;
+                number /= 10;
+            }
+
+            return sum;
+        }
+
+        static int GetReversedNumber(int number)
+        {
+            int reversedNumber = 0;
+
+            while(number != 0)
+            {
+                reversedNumber = (reversedNumber * 10) + (number % 10);
+                number /= 10;
+            }
+
+            return reversedNumber;
+        }
+
+        static int GetChagedNumber(int number)
+        {
+            int changedNum = number % 10;
+            changedNum = (changedNum * 1000) + number / 10;
+
+            return changedNum;
+        }
+
+        static int GetExchagedNumber(int number)
+        {
+            int firstDigit = number / 1000;
+            int secondDigit = (number / 100) % 10;
+            int thirdDigit = (number / 10) % 10;
+            int fourthDigit = number % 10;
+            int exchangedNumber = (firstDigit * 1000) + (thirdDigit * 100) + (secondDigit * 10) + fourthDigit;
+
+            return  exchangedNumber;
         }
         
-        static void FourDigits()
+        static void DisplayFourDigits()
         {
             Console.Write("Enter a number: ");
-            var num = int.Parse(Console.ReadLine());
+            int number = int.Parse(Console.ReadLine());
 
-            int sum = 0;
-            int numCopy = num;
-            while(numCopy != 0)
-            {
-                sum += numCopy % 10;
-                numCopy /= 10;
-            }
-            int reversedNumber = 0;
-            int numCopy2 = num;
-            while(numCopy2 != 0)
-            {
-                reversedNumber = (reversedNumber * 10) + (numCopy2 % 10);
-                numCopy2 /= 10;
-            }
-            int numCopy3 = num;
-            int changedNum = numCopy3 % 10;
-            changedNum = (changedNum * 1000) + numCopy3 / 10;
-
-            int firstDigit = num / 1000;
-            int secondDigit = (num / 100) % 10;
-            int thirdDigit = (num / 10) % 10;
-            int fourthDigit = num % 10;
-            int exchangedNumber = (firstDigit * 1000) + (thirdDigit * 100) + (secondDigit * 10) + fourthDigit;
+            int sum = GetSumOfDigits(number);
+            int reversedNumber = GetReversedNumber(number);
+            int changedNum = GetChagedNumber(number);
+            int exchangedNumber = GetExchagedNumber(number);
 
             Console.WriteLine(sum + " " + reversedNumber + " " + changedNum + " " + exchangedNumber);
         }
@@ -144,87 +170,103 @@ namespace Expression
         static bool IsPrime()
         {
             Console.Write("Enter a number: ");
-            var num = int.Parse(Console.ReadLine());
+            int number = int.Parse(Console.ReadLine());
 
-            if (num <= 1)
+            if (number <= 1)
             {
                 return false;
             }
 
-            int sqrt = (int)Math.Sqrt(num);
-            for (int i = 2; i <= sqrt; i++)
+            int sqrt = (int)Math.Sqrt(number);
+            int divisor = 2;
+            bool isPrime = true;
+
+            while (divisor <= sqrt)
             {
-                if (num % i == 0)
-                    return false;
+                if (number % divisor == 0)
+                {
+                    isPrime = false;
+                    break;
+                }
+            divisor++;
             }
 
-             return true;
+            return isPrime;
         }
     
-        static void FindTrapezoidArea()
+        static void DislpayTrapezoidArea()
         {
             Console.Write("Enter the side a: ");
-            var a = float.Parse(Console.ReadLine());
+            float a = float.Parse(Console.ReadLine());
 
             Console.Write("Enter the side b: ");
-            var b = float.Parse(Console.ReadLine());
-            
+            float b = float.Parse(Console.ReadLine());
+
             Console.Write("Enter the height h: ");
-            var h = float.Parse(Console.ReadLine());
+            float h = float.Parse(Console.ReadLine());
 
             Console.WriteLine(((a + b)* h) / 2);
         }
 
-        static int ConvetDecimalToBinary(int num)
+        static int ConvetDecimalToBinary()
         {      
+            Console.Write("Enter a number: ");
+            int number = int.Parse(Console.ReadLine());
+
             int remainder;
             string result = string.Empty;
-            while (num > 0)
+
+            while (number > 0)
             {
-                remainder = num % 2;
-                num /= 2;
+                remainder = number % 2;
+                number /= 2;
                 result = remainder.ToString() + result;
             }
+
             return int.Parse(result);
         }
 
-        static void GetThirdBitValue()
+
+        static void DisplayThirdBitValue()
         {
             Console.Write("Enter a positive integer: ");
-            int num = int.Parse(Console.ReadLine());
-            if (num < 0)
+            int number = int.Parse(Console.ReadLine());
+
+            const int shiftsCount = 3;
+
+            if (number < 0)
             {
                 Console.WriteLine("Invalid input. Please enter a positive integer.");
                 return;
             }
 
-            int thirdBitValue = (num >> 3) & 1;
+            int thirdBitValue = (number >> shiftsCount) & 1;
 
             Console.WriteLine(thirdBitValue);
         }
 
-        static void GetNthBitValue()
+        static void DisplayNthBitValue()
         {
             Console.Write("Enter a positive integer: ");
-            int num = int.Parse(Console.ReadLine());
+            int number = int.Parse(Console.ReadLine());
 
-            Console.Write("Enter N: ");
-            int N = int.Parse(Console.ReadLine());
+            Console.Write("Enter hpw many shifts: ");
+            int shiftsCount = int.Parse(Console.ReadLine());
 
-            if (num < 0)
+            if (number < 0)
             {
                 Console.WriteLine("Invalid input. Please enter a positive integer.");
                 return;
             }
 
-            int nthBitValue = (num >> N) & 1;
+            int nthBitValue = (number >> shiftsCount) & 1;
 
             Console.WriteLine(nthBitValue);
         }
 
         static void Main(string[] args)
         {
-            
+            DisplayNthBitValue();
         }
     }
 }
