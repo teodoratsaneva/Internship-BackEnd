@@ -21,27 +21,20 @@ namespace ConsoleInputOutput
             Console.Write("Enter the radius ofcircle: ");
             float r = float.Parse(Console.ReadLine());
 
-            float pi = 3.14f;
+            const float pi = 3.14f;
 
-            Console.WriteLine(2*pi*r);
-            Console.WriteLine(r*r*pi);
+            Console.WriteLine(2 * pi * r);
+            Console.WriteLine(r * r * pi);
         }
 
         static void CompareNumber()
         {
             Console.Write("Enter the first number: ");
-            int num1 = int.Parse(Console.ReadLine());
+            int number1 = int.Parse(Console.ReadLine());
             Console.Write("Enter the second number: ");
-            int num2 = int.Parse(Console.ReadLine());
+            int number2 = int.Parse(Console.ReadLine());
 
-            if (num1 > num2)
-            {
-                Console.WriteLine(num1);
-            }
-            else
-            {
-                Console.WriteLine(num2);
-            }
+            Console.Write(number1 > number2 ? number1 : number2);
         }
 
         static void DisplayNumbersFrom1ToN()
@@ -67,6 +60,7 @@ namespace ConsoleInputOutput
             float c = float.Parse(Console.ReadLine());
 
             float D = b * b - 4 * a * c;
+
             if (D > 0)
             {
                 Console.WriteLine("x1 = " + (-b + Math.Sqrt(D)) / (2 * a));
@@ -107,11 +101,11 @@ namespace ConsoleInputOutput
         static void DisplayFibonacciNumbers()
         {
             Console.Write("Enter the number of Fibonacci numbers to generate: ");
-            int n = int.Parse(Console.ReadLine());
+            int number = int.Parse(Console.ReadLine());
 
             int a = 0, b = 1;
 
-            for (int i = 0; i < n; i++)
+            for (int i = 0; i < number; i++)
             {
                 Console.Write(a + ", ");
                 int temp = a + b;
@@ -120,17 +114,17 @@ namespace ConsoleInputOutput
             }
         }
 
-        static void DisplayHowManyNUmbersHaveBetweenTwoNumbers()
+        static void DisplayHowManyNumbersHaveBetweenTwoNumbers()
         {
             Console.WriteLine("Enter first number: ");
-            int n = int.Parse(Console.ReadLine());
+            int number1 = int.Parse(Console.ReadLine());
 
             Console.WriteLine("Enter second number: ");
-            int m = int.Parse(Console.ReadLine());
+            int number2 = int.Parse(Console.ReadLine());
 
             int count = 0;
 
-            for(int i=n + 1; i < m; i++)
+            for(int i = number1 + 1; i < number2; i++)
             {
                 if(i % 5 == 0)
                 {
@@ -141,9 +135,9 @@ namespace ConsoleInputOutput
             Console.WriteLine(count);
         }
 
-        // static void Main(string[] args)
-        // {
-        //     DisplayCirclePerimeterAndArea();
-        // }
+        static void Main(string[] args)
+        {
+            
+        }
     }
 }
