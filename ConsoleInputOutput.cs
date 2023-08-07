@@ -59,14 +59,14 @@ namespace ConsoleInputOutput
             Console.Write("Enter c: ");
             float c = float.Parse(Console.ReadLine());
 
-            float D = b * b - 4 * a * c;
+            float d = b * b - 4 * a * c;
 
-            if (D > 0)
+            if (d > 0)
             {
-                Console.WriteLine("x1 = " + (-b + Math.Sqrt(D)) / (2 * a));
-                Console.WriteLine("x2 = " + (-b - Math.Sqrt(D)) / (2 * a));
+                Console.WriteLine("x1 = " + (-b + Math.Sqrt(d)) / (2 * a));
+                Console.WriteLine("x2 = " + (-b - Math.Sqrt(d)) / (2 * a));
             }
-            else if (D == 0)
+            else if (d == 0)
             {
                 Console.WriteLine("x = " + (-b) / (2 * a));
             }
@@ -79,20 +79,14 @@ namespace ConsoleInputOutput
         static void DisplaySumOfNNumbers()
         {
             Console.WriteLine("Enter n: ");
-            int n = int.Parse(Console.ReadLine());
-
-           float[] nums = new float[n];
-
-            for(int j = 0; j < n; j++)
-            {
-                nums[j] = float.Parse(Console.ReadLine());
-            }
+            int counter = int.Parse(Console.ReadLine());
 
             float sum = 0;
 
-            for (int i = 0; i < n; i++)
+            for(int j = 0; j < counter; j++)
             {
-                sum += nums[i];
+                float number = float.Parse(Console.ReadLine());
+                sum += number;
             }
 
             Console.WriteLine(sum);
@@ -126,10 +120,12 @@ namespace ConsoleInputOutput
 
             for(int i = number1 + 1; i < number2; i++)
             {
+
                 if(i % 5 == 0)
                 {
                     count++;
                 }
+
             }
 
             Console.WriteLine(count);
@@ -137,7 +133,7 @@ namespace ConsoleInputOutput
 
         static void Main(string[] args)
         {
-            
+            DisplaySumOfNNumbers();
         }
     }
 }
