@@ -22,7 +22,7 @@ namespace ConditionalStatments
 
             int bonus = 0;
 
-            switch(number)
+            switch (number)
             {
                 case 1:
                 case 2:
@@ -60,11 +60,11 @@ namespace ConditionalStatments
 
             float productOfThreeNumbes = number1 * number2 * number3;
 
-            if(productOfThreeNumbes < 0)
+            if (productOfThreeNumbes < 0)
             {
                 Console.WriteLine('-');
             }
-            else if(productOfThreeNumbes > 0)
+            else if (productOfThreeNumbes > 0)
             {
                 Console.WriteLine('+');
             }
@@ -88,70 +88,56 @@ namespace ConditionalStatments
             if (number1 >= number2 && number1 >= number3)
             {
                 if (number2 >= number3)
+                {
                     Console.WriteLine($"{number1} {number2} {number3}");
+                }
                 else
+                {
                     Console.WriteLine($"{number1} {number3} {number2}");
+                }
             }
             else if (number2 >= number1 && number2 >= number3)
             {
                 if (number1 >= number3)
+                {
                     Console.WriteLine($"{number2} {number1} {number3}");
+                }
                 else
+                {
                     Console.WriteLine($"{number2} {number3} {number1}");
+                }
             }
             else
             {
                 if (number1 >= number2)
+                {
                     Console.WriteLine($"{number3} {number1} {number2}");
+                }
                 else
+                {
                     Console.WriteLine($"{number3} {number2} {number1}");
+                }
             }
         }
 
         static void DisplayDigitAsWord()
         {
+            string[] digitWords = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
+
             Console.Write("Enter a digit: ");
             int digit = int.Parse(Console.ReadLine());
 
-                switch (digit)
-                {
-                    case 0:
-                        Console.WriteLine("zero");
-                        break;
-                    case 1:
-                        Console.WriteLine("one");
-                        break;
-                    case 2:
-                        Console.WriteLine("two");
-                        break;
-                    case 3:
-                        Console.WriteLine("three");
-                        break;
-                    case 4:
-                        Console.WriteLine("four");
-                        break;
-                    case 5:
-                        Console.WriteLine("five");
-                        break;
-                    case 6:
-                        Console.WriteLine("six");
-                        break;
-                    case 7:
-                        Console.WriteLine("seven");
-                        break;
-                    case 8:
-                        Console.WriteLine("eight");
-                        break;
-                    case 9:
-                        Console.WriteLine("nine");
-                        break;
-                    default:
-                        Console.WriteLine("not a digit");
-                        return;
-                }
+            if (digit >= 0 && digit <= 9)
+            {
+                Console.WriteLine(digitWords[digit]);
+            }
+            else
+            {
+                Console.WriteLine("not a digit");
+            }
         }
 
-        static void DisplayIsIntDoubleOrString()
+        static void DisplayTheChangesOnIntDoubleOrString()
         {
             Console.WriteLine("Enter one of the word integer, real or text");
             string inputType = Console.ReadLine();
@@ -177,12 +163,13 @@ namespace ConditionalStatments
             }
         }
 
-        static void Main(string[] args)
-        {
-            DisplayIsIntDoubleOrString();
-        }
+        // static void Main(string[] args)
+        // {
+        //    DisplayDigitAsWord();
+        // }
     }
 }
+
 
 
 
