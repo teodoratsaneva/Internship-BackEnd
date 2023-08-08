@@ -33,14 +33,14 @@ namespace Arrays
 
             int[] array2 = new int[size];
             Console.WriteLine("Enter elements of the second array: ");
-            
+
             for (int i = 0; i < size; i++)
             {
                 array2[i] = int.Parse(Console.ReadLine());
             }
 
             bool isEqual = true;
-            
+
             for (int i = 0; i < size; i++)
             {
 
@@ -68,7 +68,7 @@ namespace Arrays
 
         //     Console.Write(secondArrayLenght);
 
-            
+
 
 
         // }
@@ -240,7 +240,7 @@ namespace Arrays
             {
                 array[i] = int.Parse(Console.ReadLine());
             }
-            
+
             int maxCounter = 1;
             int currentCounter = 1;
             int maxElement = 0;
@@ -251,7 +251,7 @@ namespace Arrays
                 for (int j = i + 1; j < size; j++)
                 {
 
-                    if(array[i] == array[j])
+                    if (array[i] == array[j])
                     {
                         currentCounter++;
                     }
@@ -268,44 +268,6 @@ namespace Arrays
             }
 
             Console.WriteLine($"{maxElement} ({maxCounter} times)");
-        }
-
-        // static void DisplayElementsWichAreSumOfGivenNumber()
-        // {
-        //     Console.WriteLine("Enter the size of the arrays: ");
-        //     int size = int.Parse(Console.ReadLine());
-
-        //     Consle.WriteLine("Enter the number: ");
-        //     int number = int.Parse(Console.ReadLIne());
-
-        //     int[] array = new int[size];
-        //     Console.WriteLine("Enter elements of the array: ");
-
-        //     for (int i = 0; i < size; i++)
-        //     {
-        //         array[i] = int.Parse(Console.ReadLine());
-        //     }
-
-        //     for (int i = 0; i < size - 1; i++)
-        //     {
-        //         number -= array[i];
-
-        //         for (int j = 0; j < size; j++)
-        //         {
-        //             number -= array[j];
-        //         }
-
-        //         if (number == 0)
-        //         {
-        //             Console.WriteLine()
-        //         }
-        //     }
-        // }
-
-
-        static void DinplayIndexOfLetters()
-        {
-            
         }
 
         static void Main(string[] args)
