@@ -54,25 +54,6 @@ namespace Arrays
             return isEqual;
         }
 
-        // static void DisplayComparingCharArrays()
-        // {
-        //     Console.WriteLine("Enter first char array: ");
-        //     string firstAsAString = Console.ReadLine();
-        //     char[] firstArray = firstAsAString.ToCharArray();
-        //     int firstArrayLength = firstArray.Length;
-
-        //     Console.WriteLine("Enter second char array: ");
-        //     string secondAsAString = Console.ReadLine();
-        //     char[] seconArray = secondAsAString.ToCharArray();
-        //     int secondArrayLength = secondArray.Length;
-
-        //     Console.Write(secondArrayLenght);
-
-
-
-
-        // }
-
         static void DisplayMaximalSequence()
         {
             Console.WriteLine("Enter the size of the arrays: ");
