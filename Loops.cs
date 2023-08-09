@@ -213,7 +213,7 @@ namespace Loops
             Console.WriteLine(result);
         }
 
-        static void DisplayHowManyZeroesFacturielNumberHave()
+        static void DisplayFactorialZerosCount()
         {
             Console.WriteLine("Enter a number: ");
             int number = int.Parse(Console.ReadLine());
