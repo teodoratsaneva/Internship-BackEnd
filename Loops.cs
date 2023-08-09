@@ -304,9 +304,9 @@ namespace Loops
             }
         }
 
-        // static void Main(string[] args)
-        // {
-        //     ConversBinaryToDecimal();
-        // }
+        static void Main(string[] args)
+        {
+            ConversBinaryToDecimal();
+        }
     }
 }

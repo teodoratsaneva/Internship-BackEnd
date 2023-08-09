@@ -151,10 +151,10 @@ namespace ConditionalStatments
             }
         }
 
-        static void Main(string[] args)
-        {
-           DisplaySortedNumbers();
-        }
+        // static void Main(string[] args)
+        // {
+        //    DisplaySortedNumbers();
+        // }
     }
 }
 
