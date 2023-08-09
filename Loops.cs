@@ -272,26 +272,26 @@ namespace Loops
 
                 startRow++;
 
-                for (int i = startRow; i <= endRow; i++)
-                {
-                    matrix[i, endCol] = currentValue++;
-                }
+            for (int i = startRow; i <= endRow; i++)
+            {
+                matrix[i, endCol] = currentValue++;
+            }
 
-                endCol--;
+            endCol--;
 
-                for (int i = endCol; i >= startCol; i--)
-                {
-                    matrix[endRow, i] = currentValue++;
-                }
+            for (int i = endCol; i >= startCol; i--)
+            {
+                matrix[endRow, i] = currentValue++;
+            }
 
-                endRow--;
+            endRow--;
 
-                for (int i = endRow; i >= startRow; i--)
-                {
-                    matrix[i, startCol] = currentValue++;
-                }
+            for (int i = endRow; i >= startRow; i--)
+            {
+                matrix[i, startCol] = currentValue++;
+            }
 
-                startCol++;
+            startCol++;
             }
 
             for (int i = 0; i < n; i++)
