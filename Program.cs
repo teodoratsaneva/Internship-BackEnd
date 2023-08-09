@@ -1,180 +1,272 @@
 ﻿using System;
 
-namespace ConditionalStatments
+namespace Expression
 {
     class Program
     {
-        static void DisplayExchangeOfTwoNumbers()
+        static void DisplayMyName()
         {
-            Console.Write("Enter the first number: ");
-            int number1 = int.Parse(Console.ReadLine());
+            Console.Write("Enter your first name: ");
+            string firstName = Console.ReadLine();
 
-            Console.Write("Enter the second number: ");
-            int number2 = int.Parse(Console.ReadLine());
+            Console.Write("Enter your last name: ");
+            string secondName = Console.ReadLine();
 
-            Console.WriteLine(number2 + " " + number1);
+            Console.Write("Enter how old are you: ");
+            int age = int.Parse(Console.ReadLine());
+
+            Console.Write("Enter where you from: ");
+            string town = Console.ReadLine();
+
+            Console.WriteLine("You are {0} {1}, a {2}-years old person from {3}.", firstName, secondName, age, town);
         }
 
-        static void DisplayBonusScore()
+        static void DisplaySquare()
         {
-            Console.Write("Enter the number: ");
+            Console.Write("Enter a number: ");
+
             int number = int.Parse(Console.ReadLine());
 
-            int bonus = 0;
-
-            switch (number)
+            for (int i = 0; i < number; i++)
             {
-                case 1:
-                case 2:
-                case 3:
-                    bonus = number * 10;
-                    break;
-                case 4:
-                case 5:
-                case 6:
-                    bonus = number * 100;
-                    break;
-                case 7:
-                case 8:
-                case 9:
-                    bonus = number * 1000;
-                    break;
-                default:
-                    Console.WriteLine("Invalid score");
-                    return;
-            }
-
-            Console.WriteLine(bonus);
-        }
-
-        static void DisplaySignOfTheProductOfThreeNumbers()
-        {
-            Console.Write("Enter the first number: ");
-            float number1 = float.Parse(Console.ReadLine());
-
-            Console.Write("Enter the second number: ");
-            float number2 = float.Parse(Console.ReadLine());
-
-            Console.Write("Enter the third number: ");
-            float number3 = float.Parse(Console.ReadLine());
-
-            float productOfThreeNumbes = number1 * number2 * number3;
-
-            if (productOfThreeNumbes < 0)
-            {
-                Console.WriteLine('-');
-            }
-            else if (productOfThreeNumbes > 0)
-            {
-                Console.WriteLine('+');
-            }
-            else
-            {
-                Console.WriteLine('0');
-            }
-        }
-
-        static void DisplaySortedNumbers()
-        {
-            Console.Write("Enter the first number: ");
-            float number1 = float.Parse(Console.ReadLine());
-
-            Console.Write("Enter the second number: ");
-            float number2 = float.Parse(Console.ReadLine());
-
-            Console.Write("Enter the third number: ");
-            float number3 = float.Parse(Console.ReadLine());
-
-            if (number1 >= number2 && number1 >= number3)
-            {
-                if (number2 >= number3)
+                if ((i == 0) || (i == number - 1))
                 {
-                    Console.WriteLine($"{number1} {number2} {number3}");
+                    for (int j = 0; j < number; j++)
+                    {
+                        Console.Write("*");
+                    }
                 }
                 else
                 {
-                    Console.WriteLine($"{number1} {number3} {number2}");
+                    Console.Write("*");
+
+                    for (int k = 0; k < number - 2; k++)
+                    {
+                        Console.Write(" ");
+                    }
+
+                    Console.Write("*");
                 }
-            }
-            else if (number2 >= number1 && number2 >= number3)
-            {
-                if (number1 >= number3)
-                {
-                    Console.WriteLine($"{number2} {number1} {number3}");
-                }
-                else
-                {
-                    Console.WriteLine($"{number2} {number3} {number1}");
-                }
-            }
-            else
-            {
-                if (number1 >= number2)
-                {
-                    Console.WriteLine($"{number3} {number1} {number2}");
-                }
-                else
-                {
-                    Console.WriteLine($"{number3} {number2} {number1}");
-                }
+
+                Console.WriteLine();
             }
         }
 
-        static void DisplayDigitAsWord()
+        static void DisplayIsOddOrEvenNumber()
         {
-            string[] digitWords = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
+            Console.Write("Enter a number: ");
 
-            Console.Write("Enter a digit: ");
-            int digit = int.Parse(Console.ReadLine());
+            int number = int.Parse(Console.ReadLine());
 
-            if (digit >= 0 && digit <= 9)
-            {
-                Console.WriteLine(digitWords[digit]);
-            }
-            else
-            {
-                Console.WriteLine("not a digit");
-            }
+            Console.WriteLine(number % 2 == 0 ? "even " + number : "odd " + number);
         }
 
-        static void DisplayTheChangesOnIntDoubleOrString()
+        static void DisplayMoonGravity()
         {
-            Console.WriteLine("Enter one of the word integer, real or text");
-            string inputType = Console.ReadLine();
-            switch (inputType)
-            {
-                case "integer":
-                    Console.Write("Enter integer number: ");
-                    int intValue = int.Parse(Console.ReadLine());
-                    intValue++;
-                    Console.WriteLine(intValue);
-                    break;
-                case "real":
-                    Console.Write("Enter real number: ");
-                    double doubleValue = double.Parse(Console.ReadLine());
-                    doubleValue += 1.0;
-                    Console.WriteLine($"{doubleValue:F2}");
-                    break;
-                case "text":
-                    Console.Write("Enter text: ");
-                    string stringValue = Console.ReadLine();
-                    Console.WriteLine($"{stringValue}*");
-                    break;
-            }
+            Console.Write("Enter a number: ");
+
+            float number = float.Parse(Console.ReadLine());
+            const float gravitationalField = 0.17f;
+
+            Console.WriteLine(number * gravitationalField);
         }
 
-        // static void Main(string[] args)
-        // {
-        //    DisplayDigitAsWord();
-        // }
+        static void DisplayIsNumberDivideBy7And5()
+        {
+            Console.Write("Enter a number: ");
+
+            int number = int.Parse(Console.ReadLine());
+
+            const int firstDivisor = 7;
+            const int secondDivisor = 5;
+
+            Console.WriteLine(number % firstDivisor == 0 || number % secondDivisor == 0 ? "true " + number : "false " + number);
+        }
+
+        static void DisplayRectangleArea()
+        {
+            Console.Write("Enter a width of the rectangle: ");
+            float width = float.Parse(Console.ReadLine());
+
+            Console.Write("Enter a height of the rectangle: ");
+            float height = float.Parse(Console.ReadLine());
+
+            Console.WriteLine(width * height + " " + (width * 2 + height * 2));
+        }
+
+        static void DisplayIsThirdDigitEqualTo7()
+        {
+            Console.Write("Enter a number: ");
+            int number = int.Parse(Console.ReadLine());
+
+            int thirdDigit = (number / 100) % 10;
+            const int digit = 7;
+
+            Console.WriteLine(thirdDigit == digit ? "True" : ("False " + thirdDigit));
+        }
+
+        static int GetSumOfDigits(int number)
+        {
+            int sum = 0;
+
+            while(number != 0)
+            {
+                sum += number % 10;
+                number /= 10;
+            }
+
+            return sum;
+        }
+
+        static int GetReversedNumber(int number)
+        {
+            int reversedNumber = 0;
+
+            while(number != 0)
+            {
+                reversedNumber = (reversedNumber * 10) + (number % 10);
+                number /= 10;
+            }
+
+            return reversedNumber;
+        }
+
+        static int GetChagedNumber(int number)
+        {
+            int changedNum = number % 10;
+            changedNum = (changedNum * 1000) + number / 10;
+
+            return changedNum;
+        }
+
+        static int GetExchagedNumber(int number)
+        {
+            int firstDigit = number / 1000;
+            int secondDigit = (number / 100) % 10;
+            int thirdDigit = (number / 10) % 10;
+            int fourthDigit = number % 10;
+            int exchangedNumber = (firstDigit * 1000) + (thirdDigit * 100) + (secondDigit * 10) + fourthDigit;
+
+            return  exchangedNumber;
+        }
+        
+        static void DisplayFourDigits()
+        {
+            Console.Write("Enter a number: ");
+            int number = int.Parse(Console.ReadLine());
+
+            int sum = GetSumOfDigits(number);
+            int reversedNumber = GetReversedNumber(number);
+            int changedNum = GetChagedNumber(number);
+            int exchangedNumber = GetExchagedNumber(number);
+
+            Console.WriteLine(sum + " " + reversedNumber + " " + changedNum + " " + exchangedNumber);
+        }
+
+
+        static bool IsPrime()
+        {
+            Console.Write("Enter a number: ");
+            int number = int.Parse(Console.ReadLine());
+
+            if (number <= 1)
+            {
+                return false;
+            }
+
+            int sqrt = (int)Math.Sqrt(number);
+            int divisor = 2;
+            bool isPrime = true;
+
+            while (divisor <= sqrt)
+            {
+                if (number % divisor == 0)
+                {
+                    isPrime = false;
+                    break;
+                }
+
+            divisor++;
+            }
+
+            return isPrime;
+        }
+    
+        static void DislpayTrapezoidArea()
+        {
+            Console.Write("Enter the side a: ");
+            float a = float.Parse(Console.ReadLine());
+
+            Console.Write("Enter the side b: ");
+            float b = float.Parse(Console.ReadLine());
+
+            Console.Write("Enter the height h: ");
+            float h = float.Parse(Console.ReadLine());
+
+            Console.WriteLine(((a + b)* h) / 2);
+        }
+
+        static int ConvetDecimalToBinary()
+        {      
+            Console.Write("Enter a number: ");
+            int number = int.Parse(Console.ReadLine());
+
+            int remainder;
+            string result = string.Empty;
+
+            while (number > 0)
+            {
+                remainder = number % 2;
+                number /= 2;
+                result = remainder.ToString() + result;
+            }
+
+            return int.Parse(result);
+        }
+
+
+        static void DisplayThirdBitValue()
+        {
+            Console.Write("Enter a positive integer: ");
+            int number = int.Parse(Console.ReadLine());
+
+            const int shiftsCount = 3;
+
+            if (number < 0)
+            {
+                Console.WriteLine("Invalid input. Please enter a positive integer.");
+                return;
+            }
+
+            int thirdBitValue = (number >> shiftsCount) & 1;
+
+            Console.WriteLine(thirdBitValue);
+        }
+
+        static void DisplayNthBitValue()
+        {
+            Console.Write("Enter a positive integer: ");
+            int number = int.Parse(Console.ReadLine());
+
+            Console.Write("Enter hpw many shifts: ");
+            int shiftsCount = int.Parse(Console.ReadLine());
+
+            if (number < 0)
+            {
+                Console.WriteLine("Invalid input. Please enter a positive integer.");
+                return;
+            }
+
+            int nthBitValue = (number >> shiftsCount) & 1;
+
+            Console.WriteLine(nthBitValue);
+        }
+
+        static void Main(string[] args)
+        {
+            DisplayNthBitValue();
+        }
     }
 }
-
-
-
-
-
-
-
 
 
