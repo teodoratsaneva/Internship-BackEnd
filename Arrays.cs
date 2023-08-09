@@ -4,6 +4,13 @@ namespace Arrays
 {
     class Program
     {
+
+        static void swapElements(int first, int second)
+        {
+            int temp = second;
+            second = first;
+            first = temp;
+        }
         static void DisplayAllocatedArray()
         {
             Console.WriteLine("Enter a number: ");
@@ -155,9 +162,7 @@ namespace Arrays
                     }
                 }
 
-                int temp = array[maxIndex];
-                array[maxIndex] = array[i];
-                array[i] = temp;
+                swapElements(array[i], array[maxIndex]);
             }
 
             int sum = 0;
@@ -196,9 +201,7 @@ namespace Arrays
                     }
                 }
 
-                int temp = array[minIndex];
-                array[minIndex] = array[i];
-                array[i] = temp;
+                swapElements(array[i], array[minIndex]);
             }
 
             Console.WriteLine("Sorted array: ");
@@ -251,13 +254,189 @@ namespace Arrays
             Console.WriteLine($"{maxElement} ({maxCounter} times)");
         }
 
+        static void DisplayBinarySearchAlgorthm()
+        {
+            Console.WriteLine("Enter the size of the arrays: ");
+            int size = int.Parse(Console.ReadLine());
+
+            int[] array = new int[size];
+            Console.WriteLine("Enter elements of the array: ");
+
+            for (int i = 0; i < size; i++)
+            {
+                array[i] = int.Parse(Console.ReadLine());
+            }
+
+            Console.WriteLine("Enter element that you want to search: ");
+            int element = int.Parse(Console.ReadLine());
+
+            int leftSide = 0;
+            int rightSide = size - 1;
+
+            while (leftSide < rightSide)
+            {
+                int midd = (leftSide + rightSide) / 2;
+
+                if (array[midd] == element)
+                {
+                    Console.WriteLine(midd);
+                    break;
+                }
+                else if (array[midd] < element)
+                {
+                    leftSide = midd + 1;
+                }
+                else
+                {
+                    rightSide = midd;
+                }
+            }
+        }
+
+        static void DisplayIndexOfLetters()
+        {
+            const int lettersCount = 26;
+            char[] alphabetArray = new char[lettersCount];
+
+            for (int i = 0; i < lettersCount; i++)
+            {
+                alphabetArray[i] = Convert.ToChar('a' + i);
+            }
+
+            Console.WriteLine("Enter the word: ");
+            string word = Console.ReadLine();
+
+            for (int i = 0; i < word.Length; i++)
+            {
+                for (int j = 0; j < lettersCount; j++)
+                {
+                    if (word[i] == alphabetArray[j])
+                    {
+                        Console.WriteLine(j);
+                    }
+                }
+            }
+        }
+
+        static void Merge(int[] arr, int left, int middle, int right)
+        {
+            int n1 = middle - left + 1;
+            int n2 = right - middle;
+
+            int[] leftArr = new int[n1];
+            int[] rightArr = new int[n2];
+
+            for (int i = 0; i < n1; i++)
+                leftArr[i] = arr[left + i];
+            for (int j = 0; j < n2; j++)
+                rightArr[j] = arr[middle + 1 + j];
+
+            int k = left;
+            int l = 0;
+            int r = 0;
+
+            while (l < n1 && r < n2)
+            {
+                if (leftArr[l] <= rightArr[r])
+                {
+                    arr[k] = leftArr[l];
+                    l++;
+                }
+                else
+                {
+                    arr[k] = rightArr[r];
+                    r++;
+                }
+                k++;
+            }
+
+            while (l < n1)
+            {
+                arr[k] = leftArr[l];
+                l++;
+                k++;
+            }
+
+            while (r < n2)
+            {
+                arr[k] = rightArr[r];
+                r++;
+                k++;
+            }
+        }
+
+        static void Sort(int[] arr, int left, int right)
+        {
+            if (left < right)
+            {
+                int middle = left + (right - left) / 2;
+
+                Sort(arr, left, middle);
+                Sort(arr, middle + 1, right);
+
+                Merge(arr, left, middle, right);
+            }
+        }
+
+        static void DisplayMergeSortAlgorithm()
+        {
+            Console.WriteLine("Enter the size of the arrays: ");
+            int size = int.Parse(Console.ReadLine());
+
+            int[] array = new int[size];
+            Console.WriteLine("Enter elements of the array: ");
+
+            for (int i = 0; i < size; i++)
+            {
+                array[i] = int.Parse(Console.ReadLine());
+            }
+
+            Sort(array, 0, size - 1);
+
+            for (int i = 0; i < size; i++)
+            {
+                Console.WriteLine(array[i]);
+            }
+
+        }
+
+
+        static void DisplayBiggestPrimeNumber()
+        {
+            Console.WriteLine("Enter a number: ");
+            int number = int.Parse(Console.ReadLine());
+
+            bool[] isPrime = new bool[number + 1];
+
+            for (int i = 2; i <= number; i++)
+            {
+                isPrime[i] = true;
+            }
+
+            for (int i = 2; i * i <= number; i++)
+            {
+                if (isPrime[i])
+                {
+                    for (int j = i * i; j <= number; j += i)
+                    {
+                        isPrime[j] = false;
+                    }
+                }
+            }
+
+            for (int i = number; i >= 2; i--)
+            {
+                if (isPrime[i])
+                {
+                    Console.WriteLine(i);
+                    break;
+                }
+            }
+        }
+
         static void Main(string[] args)
         {
-            DisplayMostFrequentElemenOfArray();
+            DisplayQuickSortAlgorithm();
         }
     }
 }
-
-
-
-
