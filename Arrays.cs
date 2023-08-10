@@ -11,40 +11,45 @@ namespace Arrays
             second = first;
             first = temp;
         }
-        static void DisplayAllocatedArray()
+        static int[] createArray(int size)
         {
-            Console.WriteLine("Enter a number: ");
-            int n = int.Parse(Console.ReadLine());
-            int[] array = new int[n];
-
-            const int multiplier = 5;
-
-            for (int i = 0; i < n; i++)
-            {
-                Console.WriteLine(i * multiplier);
-            }
-        }
-
-        static bool IsArraysAreEqual()
-        {
-            Console.WriteLine("Enter the size of arrays: ");
-            int size = int.Parse(Console.ReadLine());
-
             int[] array = new int[size];
-            Console.WriteLine("Enter elements of the first array: ");
+            Console.WriteLine("Enter elements of the array: ");
 
             for (int i = 0; i < size; i++)
             {
                 array[i] = int.Parse(Console.ReadLine());
             }
 
-            int[] array2 = new int[size];
-            Console.WriteLine("Enter elements of the second array: ");
+            return array;
+        }
+        static void DisplayAllocatedArray()
+        {
+            Console.WriteLine("Enter a number: ");
+            int n;
 
-            for (int i = 0; i < size; i++)
+            if (int.TryParse(Console.ReadLine(), out n))
             {
-                array2[i] = int.Parse(Console.ReadLine());
+                int[] array = new int[n];
+                const int multiplier = 5;
+
+                for (int i = 0; i < n; i++)
+                {
+                    Console.WriteLine(i * multiplier);
+                }
             }
+            else
+            {
+                Console.WriteLine("Invalid input. Please enter a valid number.");
+            }
+        }
+
+        static bool AreArraysEqual()
+        {
+            Console.WriteLine("Enter the size of arrays: ");
+            int size = int.Parse(Console.ReadLine());
+            int[] array = createArray(size);
+            int[] array2 = createArray(size);
 
             bool isEqual = true;
 
@@ -60,20 +65,12 @@ namespace Arrays
 
             return isEqual;
         }
-
         static void DisplayMaximalSequence()
         {
-            Console.WriteLine("Enter the size of the arrays: ");
+            Console.WriteLine("Enter the size of the array: ");
             int size = int.Parse(Console.ReadLine());
 
-            int[] array = new int[size];
-            Console.WriteLine("Enter elements of the array: ");
-
-            for (int i = 0; i < size; i++)
-            {
-                array[i] = int.Parse(Console.ReadLine());
-            }
-
+            int[] array = createArray(size);
             int longestCounter = 1;
             int currentCounter = 1;
 
@@ -96,19 +93,12 @@ namespace Arrays
 
             Console.WriteLine("Longest sequence " + longestCounter);
         }
-
         static void DisplayMaximalIncreasingSequence()
         {
-            Console.WriteLine("Enter the size of the arrays: ");
+            Console.WriteLine("Enter the size of the array: ");
             int size = int.Parse(Console.ReadLine());
 
-            int[] array = new int[size];
-            Console.WriteLine("Enter elements of the array: ");
-
-            for (int i = 0; i < size; i++)
-            {
-                array[i] = int.Parse(Console.ReadLine());
-            }
+            int[] array = createArray(size);
 
             int longestCounter = 1;
             int currentCounter = 1;
@@ -132,22 +122,13 @@ namespace Arrays
 
             Console.WriteLine("Longest sequence " + longestCounter);
         }
-
         static void DisplayMaximalKSum()
         {
-            Console.WriteLine("Enter the size of the arrays: ");
+            Console.WriteLine("Enter the size of the array: ");
             int size = int.Parse(Console.ReadLine());
-
             Console.WriteLine("Enter the number of elements you want to sum: ");
             int k = int.Parse(Console.ReadLine());
-
-            int[] array = new int[size];
-            Console.WriteLine("Enter elements of the array: ");
-
-            for (int i = 0; i < size; i++)
-            {
-                array[i] = int.Parse(Console.ReadLine());
-            }
+            int[] array = createArray(size);
 
             for (int i = 0; i < size - 1; i++)
             {
@@ -155,7 +136,6 @@ namespace Arrays
 
                 for (int j = i + 1; j < size; j++)
                 {
-
                     if (array[j] > array[maxIndex])
                     {
                         maxIndex = j;
@@ -174,19 +154,11 @@ namespace Arrays
 
             Console.WriteLine("Sum: " + sum);
         }
-
         static void DisplaySelectionSort()
         {
-            Console.WriteLine("Enter the size of the arrays: ");
+            Console.WriteLine("Enter the size of the array: ");
             int size = int.Parse(Console.ReadLine());
-
-            int[] array = new int[size];
-            Console.WriteLine("Enter elements of the array: ");
-
-            for (int i = 0; i < size; i++)
-            {
-                array[i] = int.Parse(Console.ReadLine());
-            }
+            int[] array = createArray(size);
 
             for (int i = 0; i < size - 1; i++)
             {
@@ -194,7 +166,6 @@ namespace Arrays
 
                 for (int j = i + 1; j < size; j++)
                 {
-
                     if (array[j] < array[minIndex])
                     {
                         minIndex = j;
@@ -211,30 +182,19 @@ namespace Arrays
                 Console.WriteLine(array[i]);
             }
         }
-
         static void DisplayMostFrequentElemenOfArray()
         {
-            Console.WriteLine("Enter the size of the arrays: ");
+            Console.WriteLine("Enter the size of the array: ");
             int size = int.Parse(Console.ReadLine());
-
-            int[] array = new int[size];
-            Console.WriteLine("Enter elements of the array: ");
-
-            for (int i = 0; i < size; i++)
-            {
-                array[i] = int.Parse(Console.ReadLine());
-            }
-
+            int[] array = createArray(size);
             int maxCounter = 1;
             int currentCounter = 1;
             int maxElement = 0;
 
             for (int i = 0; i < size - 1; i++)
             {
-
                 for (int j = i + 1; j < size; j++)
                 {
-
                     if (array[i] == array[j])
                     {
                         currentCounter++;
@@ -248,28 +208,17 @@ namespace Arrays
                 }
 
                 currentCounter = 1;
-
             }
 
             Console.WriteLine($"{maxElement} ({maxCounter} times)");
         }
-
-        static void DisplayBinarySearchAlgorthm()
+        static int DisplayBinarySearchAlgorthm()
         {
-            Console.WriteLine("Enter the size of the arrays: ");
+            Console.WriteLine("Enter the size of the array: ");
             int size = int.Parse(Console.ReadLine());
-
-            int[] array = new int[size];
-            Console.WriteLine("Enter elements of the array: ");
-
-            for (int i = 0; i < size; i++)
-            {
-                array[i] = int.Parse(Console.ReadLine());
-            }
-
+            int[] array = createArray(size);
             Console.WriteLine("Enter element that you want to search: ");
             int element = int.Parse(Console.ReadLine());
-
             int leftSide = 0;
             int rightSide = size - 1;
 
@@ -279,8 +228,7 @@ namespace Arrays
 
                 if (array[midd] == element)
                 {
-                    Console.WriteLine(midd);
-                    break;
+                    return midd;
                 }
                 else if (array[midd] < element)
                 {
@@ -291,17 +239,12 @@ namespace Arrays
                     rightSide = midd;
                 }
             }
-        }
 
+            return -1;
+        }
         static void DisplayIndexOfLetters()
         {
             const int lettersCount = 26;
-            char[] alphabetArray = new char[lettersCount];
-
-            for (int i = 0; i < lettersCount; i++)
-            {
-                alphabetArray[i] = Convert.ToChar('a' + i);
-            }
 
             Console.WriteLine("Enter the word: ");
             string word = Console.ReadLine();
@@ -310,7 +253,7 @@ namespace Arrays
             {
                 for (int j = 0; j < lettersCount; j++)
                 {
-                    if (word[i] == alphabetArray[j])
+                    if (word[i] == 'a' + j)
                     {
                         Console.WriteLine(j);
                     }
@@ -347,6 +290,7 @@ namespace Arrays
                     arr[k] = rightArr[r];
                     r++;
                 }
+
                 k++;
             }
 
@@ -364,32 +308,21 @@ namespace Arrays
                 k++;
             }
         }
-
         static void Sort(int[] arr, int left, int right)
         {
             if (left < right)
             {
                 int middle = left + (right - left) / 2;
-
                 Sort(arr, left, middle);
                 Sort(arr, middle + 1, right);
-
                 Merge(arr, left, middle, right);
             }
         }
-
         static void DisplayMergeSortAlgorithm()
         {
             Console.WriteLine("Enter the size of the arrays: ");
             int size = int.Parse(Console.ReadLine());
-
-            int[] array = new int[size];
-            Console.WriteLine("Enter elements of the array: ");
-
-            for (int i = 0; i < size; i++)
-            {
-                array[i] = int.Parse(Console.ReadLine());
-            }
+            int[] array = createArray(size);
 
             Sort(array, 0, size - 1);
 
@@ -399,8 +332,6 @@ namespace Arrays
             }
 
         }
-
-
         static void DisplayBiggestPrimeNumber()
         {
             Console.WriteLine("Enter a number: ");
@@ -415,12 +346,9 @@ namespace Arrays
 
             for (int i = 2; i * i <= number; i++)
             {
-                if (isPrime[i])
+                for (int j = i * i; j <= number; j += i)
                 {
-                    for (int j = i * i; j <= number; j += i)
-                    {
-                        isPrime[j] = false;
-                    }
+                    isPrime[j] = false;
                 }
             }
 
@@ -434,9 +362,9 @@ namespace Arrays
             }
         }
 
-        static void Main(string[] args)
-        {
-            DisplayQuickSortAlgorithm();
-        }
+        // static void Main(string[] args)
+        // {
+            
+        // }
     }
 }
