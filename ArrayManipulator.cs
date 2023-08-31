@@ -27,7 +27,8 @@ namespace ArrayManipulator
 
             return changedArray;
         }
-        static int[] GetAllEvens(int[] array, int size)
+
+        static int[] GetAllEvensFromArray(int[] array, int size)
         {
             int[] arrayResult = new int[size];
             int j = 0;
@@ -43,7 +44,8 @@ namespace ArrayManipulator
 
             return arrayResult;
         }
-        static int[] GetAllOdds(int[] array, int size)
+
+        static int[] GetAllOddsFromArray(int[] array, int size)
         {
             int[] arrayResult = new int[size];
             int j = 0;
@@ -59,111 +61,50 @@ namespace ArrayManipulator
 
             return arrayResult;
         }
-        static int GetMax(int[] array, string[] words)
+
+        static int GetMaxIndex(int[] array, string words)
         {
             int maxResultId = -1;
+            bool isOdd = words.Contains("odd");
 
             for (int i = 0; i < array.Length; i++)
             {
-                if (words[words.Length - 1] == "odd")
+                bool isCurrentValueValid = (isOdd && array[i] % 2 != 0) || (!isOdd && array[i] % 2 == 0);
+
+                if (isCurrentValueValid)
                 {
-                    if (array[i] % 2 != 0)
+                    if (maxResultId == -1 || array[i] > array[maxResultId])
                     {
                         maxResultId = i;
-                        break;
                     }
-                }
-                else if (words[words.Length - 1] == "even")
-                {
-                    if (array[i] % 2 == 0)
-                    {
-                        maxResultId = i;
-                        break;
-                    }
-                }
-
-            }
-
-            for (int j = maxResultId; j < array.Length; j++)
-            {
-                if (words[words.Length - 1] == "odd")
-                {
-                    if (array[j] % 2 != 0)
-                    {
-                        if (array[maxResultId] < array[j])
-                        {
-                            maxResultId = j;
-                        }
-                    }
-                }
-                else if (words[words.Length - 1] == "even")
-                {
-                    if (array[j] % 2 == 0)
-                    {
-                        if (array[maxResultId] < array[j])
-                        {
-                            maxResultId = j;
-                        }
-                    }
-
                 }
             }
 
             return maxResultId;
         }
-        static int GetMin(int[] array, string[] words)
+
+        static int GetMinIndex(int[] array, string[] words)
         {
-            int maxResultId = -1;
+            int minResultId = -1;
+            bool isOdd = words.Contains("odd");
 
             for (int i = 0; i < array.Length; i++)
             {
-                if (words[words.Length - 1] == "odd")
-                {
-                    if (array[i] % 2 != 0)
-                    {
-                        maxResultId = i;
-                        break;
-                    }
-                }
-                else if (words[words.Length - 1] == "even")
-                {
-                    if (array[i] % 2 == 0)
-                    {
-                        maxResultId = i;
-                        break;
-                    }
-                }
+                bool isCurrentValueValid = (isOdd && array[i] % 2 != 0) || (!isOdd && array[i] % 2 == 0);
 
-            }
-
-            for (int j = maxResultId; j < array.Length; j++)
-            {
-                if (words[words.Length - 1] == "odd")
+                if (isCurrentValueValid)
                 {
-                    if (array[j] % 2 != 0)
+                    if (minResultId == -1 || array[i] < array[minResultId])
                     {
-                        if (array[maxResultId] > array[j])
-                        {
-                            maxResultId = j;
-                        }
+                        minResultId = i;
                     }
-                }
-                else if (words[words.Length - 1] == "even")
-                {
-                    if (array[j] % 2 == 0)
-                    {
-                        if (array[maxResultId] > array[j])
-                        {
-                            maxResultId = j;
-                        }
-                    }
-
                 }
             }
 
-            return maxResultId;
+            return minResultId;
         }
-        static void GetFirst(int[] array, int count, string[] command)
+
+        static void PrintFirstsOfArray(int[] array, int count, string command)
         {
             if (count > array.Length)
             {
@@ -172,18 +113,19 @@ namespace ArrayManipulator
             }
 
             int[] arrayResult = new int[array.Length];
-            if (command[command.Length - 1] == "even")
+            if (command.Contains("even"))
             {
-                arrayResult = GetAllEvens(array, array.Length);
+                arrayResult = GetAllEvensFromArray(array, array.Length);
             }
-            else if (command[command.Length - 1] == "odd")
+            else if (command.Contains("odd"))
             {
-                arrayResult = GetAllOdds(array, array.Length);
+                arrayResult = GetAllOddsFromArray(array, array.Length);
             }
 
             Console.WriteLine("[" + string.Join(", ", arrayResult.Take(count)) + "]");
         }
-        static void GetLast(int[] array, int count, string[] command)
+
+        static void PrintLastsOfArray(int[] array, int count, string command)
         {
             if (count > array.Length)
             {
@@ -192,17 +134,29 @@ namespace ArrayManipulator
             }
 
             int[] arrayResult = new int[array.Length];
-            if (command[command.Length - 1] == "even")
+            if (command.Contains("even"))
             {
-                arrayResult = GetAllEvens(array, array.Length);
+                arrayResult = GetAllEvensFromArray(array, array.Length);
             }
-            else if (command[command.Length - 1] == "odd")
+            else if (command.Contains("odd"))
             {
-                arrayResult = GetAllOdds(array, array.Length);
+                arrayResult = GetAllOddsFromArray(array, array.Length);
             }
 
             Console.WriteLine("[" + string.Join(", ", arrayResult.Reverse().Take(count)) + "]");
         }
+
+        enum Operation
+        {
+            Exchange,
+            First,
+            Last,
+            Max,
+            Min,
+            End,
+            Invalid
+        }
+
         static void Main(string[] args)
         {
             string numbers = Console.ReadLine();
@@ -222,35 +176,44 @@ namespace ArrayManipulator
                 string[] words = command.Split();
                 int count;
 
-                switch (words[0])
+                Operation operation;
+
+                if (Enum.TryParse(words[0], true, out operation))
                 {
-                    case "exchange":
-                        int index = int.Parse(words[1]);
-                        array = GetExchangedArray(array, index);
-                        break;
-                    case "first":
-                        count = int.Parse(words[1]);
-                        GetFirst(array, count, words);
-                        break;
-                    case "last":
-                        count = Int32.Parse(words[1]);
-                        GetLast(array, count, words);
-                        break;
-                    case "max":
-                        int maxIndex = GetMax(array, words);
-                        Console.WriteLine(maxIndex == -1 ? "No matches" : maxIndex);
-                        break;
-                    case "min":
-                        int minIndex = GetMin(array, words);
-                        Console.WriteLine(minIndex == -1 ? "No matches" : minIndex);
-                        break;
-                    case "end":
-                        running = false;
-                        Console.WriteLine("[" + string.Join(", ", array.Take(array.Length)) + "]");
-                        break;
-                    default:
-                        Console.WriteLine("Invalid command");
-                        break;
+                    switch (operation)
+                    {
+                        case Operation.Exchange:
+                            int index = int.Parse(words[1]);
+                            array = GetExchangedArray(array, index);
+                            break;
+                        case Operation.First:
+                            count = int.Parse(words[1]);
+                            PrintFirstsOfArray(array, count, command);
+                            break;
+                        case Operation.Last:
+                            count = int.Parse(words[1]);
+                            PrintLastsOfArray(array, count, command);
+                            break;
+                        case Operation.Max:
+                            int maxIndex = GetMaxIndex(array, command);
+                            Console.WriteLine(maxIndex == -1 ? "No matches" : maxIndex);
+                            break;
+                        case Operation.Min:
+                            int minIndex = GetMinIndex(array, words);
+                            Console.WriteLine(minIndex == -1 ? "No matches" : minIndex);
+                            break;
+                        case Operation.End:
+                            running = false;
+                            Console.WriteLine("[" + string.Join(", ", array) + "]");
+                            break;
+                        case Operation.Invalid:
+                            Console.WriteLine("Invalid command");
+                            break;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid command");
                 }
             }
         }

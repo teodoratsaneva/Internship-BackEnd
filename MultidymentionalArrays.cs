@@ -19,6 +19,7 @@ namespace MultidymentionalArrays
 
             return matrix;
         }
+
         static void DisplayMatrixByColumns(int[,] matrix, int size)
         {
             int currentValue = 1;
@@ -34,6 +35,7 @@ namespace MultidymentionalArrays
                 startCol++;
             }
         }
+
         static void DisplayMatrixByZigzagColumns(int[,] matrix, int size)
         {
 
@@ -60,6 +62,7 @@ namespace MultidymentionalArrays
                 startCol++;
             }
         }
+
         static void DisplaySpiralMatrix(int[,] matrix, int size)
         {
             int currentValue = 1;
@@ -96,6 +99,7 @@ namespace MultidymentionalArrays
                 startRow++;
             }
         }
+       
         static void DisplayMatrix()
         {
             Console.WriteLine("Enter the size of matrix: ");
@@ -127,6 +131,7 @@ namespace MultidymentionalArrays
                 Console.WriteLine();
             }
         }
+        
         static void DisplaySumOfElements()
         {
             Console.WriteLine("Enter the size of rows in matrix: ");
@@ -146,6 +151,7 @@ namespace MultidymentionalArrays
 
             Console.WriteLine(sum);
         }
+        
         static bool IsElementInRow(int[] array, int size, int element)
         {
             int leftSide = 0;
@@ -159,18 +165,13 @@ namespace MultidymentionalArrays
                 {
                     return true;
                 }
-                else if (array[midd] < element)
-                {
-                    leftSide = midd + 1;
-                }
-                else
-                {
-                    rightSide = midd;
-                }
+
+                leftSide = array[midd] < element ? midd + 1 : midd;
             }
 
             return false;
         }
+        
         static bool IsElementInMatrix()
         {
             Console.WriteLine("Enter the size of rows in matrix: ");
@@ -198,6 +199,7 @@ namespace MultidymentionalArrays
 
             return false;
         }
+        
         // static void Main(string[] args)
         // {
         //     DisplayMatrix();

@@ -226,18 +226,7 @@ namespace Arrays
             {
                 int midd = (leftSide + rightSide) / 2;
 
-                if (array[midd] == element)
-                {
-                    return midd;
-                }
-                else if (array[midd] < element)
-                {
-                    leftSide = midd + 1;
-                }
-                else
-                {
-                    rightSide = midd;
-                }
+                return array[midd] == element ? midd : array[midd] < element? leftSide = midd + 1 : rightSide = midd;
             }
 
             return -1;
@@ -270,9 +259,14 @@ namespace Arrays
             int[] rightArr = new int[n2];
 
             for (int i = 0; i < n1; i++)
+            {
                 leftArr[i] = arr[left + i];
+            }
+            
             for (int j = 0; j < n2; j++)
+            {
                 rightArr[j] = arr[middle + 1 + j];
+            }
 
             int k = left;
             int l = 0;
