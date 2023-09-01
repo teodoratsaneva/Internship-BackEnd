@@ -6,22 +6,23 @@ namespace TextFiles
     public class Program
     {
 
-        static void writeToTextFile(string filePath, string[] text)
+        static void writeToTextFile(string fileName, string[] text)
         {
             //string[] text = { "New line 1", "New line 2", "New line 3", "New line 4", "New line 5" };
 
-            if (string.IsNullOrWhiteSpace(filePath))
+            if (string.IsNullOrWhiteSpace(fileName))
             {
                 Console.WriteLine("File path cannot be empty.");
             }
-            else if (File.Exists(filePath))
+            else if (File.Exists(fileName))
             {
-                Console.WriteLine($"The file {filePath} already exists. Do you want to overwrite it? (Y/N)");
+                Console.WriteLine($"The file {fileName} already exists. Do you want to overwrite it? (Y/N)");
                 var response = Console.ReadLine();
+
                 if (response.Trim().ToUpper() == "Y")
                 {
-                    File.AppendAllLines(filePath, text);
-                    Console.WriteLine($"Text successfully written to {filePath}");
+                    File.AppendAllLines(fileName, text);
+                    Console.WriteLine($"Text successfully written to {fileName}");
                 }
                 else
                 {
@@ -30,14 +31,14 @@ namespace TextFiles
             }
             else
             {
-                File.AppendAllLines(filePath, text);
-                Console.WriteLine($"Text successfully written to {filePath}");
+                File.AppendAllLines(fileName, text);
+                Console.WriteLine($"Text successfully written to {fileName}");
             }
         }
 
-        static void readAllOddsLines(string filePath)
+        static void readAllOddsLines(string fileName)
         {
-            string[] text = File.ReadAllLines(filePath);
+            string[] text = File.ReadAllLines(fileName);
 
             for (int lineCount = 0; lineCount < text.Length; lineCount++)
             {
@@ -48,16 +49,84 @@ namespace TextFiles
             }
         }
 
-        static void ConcatenateTwoTextFiles(string filePath1, string filePath2)
+        static void concatenateTwoTextFiles(string fileName1, string fileName2)
         {
-            string[] textFromFile1 = File.ReadAllLines(filePath1);
-            string[] textFromFile2 = File.ReadAllLines(filePath2);
+            string[] textFromFile1 = File.ReadAllLines(fileName1);
+            string[] textFromFile2 = File.ReadAllLines(fileName2);
 
             string[] textFromFiles = textFromFile1.Concat(textFromFile2).ToArray();
 
             Console.WriteLine("Enter file name where you want to write the text");
             string filePath = Console.ReadLine();
             writeToTextFile(filePath, textFromFiles);
+        }
+
+        static void readTextFromFile(string fileName1, string fileName2)
+        {
+            using (var reader = new StreamReader(fileName1))
+            using (var writer = new StreamWriter(fileName2))
+            {
+                int lineNumber = 1;
+                string line;
+
+                while ((line = reader.ReadLine()) != null)
+                {
+                    Console.WriteLine($" line {lineNumber}: {line}");
+                    lineNumber++;
+                    writer.WriteLine(line);
+                }
+            }
+        }
+
+        static void compareTwoTextFiles(string fileName1, string fileName2)
+        {
+            using (StreamReader reader1 = new StreamReader(fileName1))
+            using (StreamReader reader2 = new StreamReader(fileName2))
+            {
+                string line1, line2;
+                int lineNumber = 1;
+
+                while ((line1 = reader1.ReadLine()) != null && (line2 = reader2.ReadLine()) != null)
+                {
+                    if (line1 == line2)
+                    {
+                        Console.WriteLine($"Line {lineNumber}: {line1}");
+                    }
+
+                    lineNumber++;
+                }
+            }
+        }
+
+        static void replaceWordInTextFile(string fileName)
+        {
+            string word = Console.ReadLine();
+            string wordToReplace = Console.ReadLine();
+            string text = File.ReadAllText(fileName);
+            text = text.Replace(word, wordToReplace);
+            File.WriteAllText(fileName, text);
+        }
+
+        static void deleteAllOddLinesFromTextFile(string fileName)
+        {
+            string line;
+            int line_number = 0;
+
+            using (StreamReader reader = new StreamReader(fileName))
+            {
+                using (StreamWriter writer = new StreamWriter(fileName))
+                {
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        line_number++;
+
+                        if (line_number % 2 == 0)
+                            continue;
+
+                        writer.WriteLine(line);
+                    }
+                }
+            }
         }
 
         static void Main(string[] args)
@@ -70,33 +139,7 @@ namespace TextFiles
 
             try
             {
-                //writeToTextFile(filePath);
-                //readAllOddsLines(filePath);
-                ConcatenateTwoTextFiles(filePath1, filePath2);
-            }
-            catch (UnauthorizedAccessException)
-            {
-                Console.WriteLine("Access to the file is unauthorized. Please check file permissions.");
-            }
-            catch (FileNotFoundException)
-            {
-                Console.WriteLine("The specified file was not found.");
-            }
-            catch (ArgumentNullException)
-            {
-                Console.WriteLine("File path is null or empty.");
-            }
-            catch (PathTooLongException)
-            {
-                Console.WriteLine("The specified path, file name, or both exceed the system-defined maximum length.");
-            }
-            catch (DirectoryNotFoundException)
-            {
-                Console.WriteLine("The specified path is invalid.");
-            }
-            catch (NotSupportedException)
-            {
-                Console.WriteLine("The file path is in an invalid format.");
+                deleteAllOddLinesFromTextFile(filePath1);
             }
             catch (IOException ex)
             {
