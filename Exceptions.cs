@@ -5,15 +5,15 @@ public class Program
 {
     static double GetSquareRoot(double number)
     {
-        if (number > 0)
+        if (number < 0)
         {
-            return Math.Sqrt(number);
+            throw new InvalidOperationException();
         }
 
-        throw new InvalidOperationException();
+        return Math.Sqrt(number);
     }
 
-    static int[] CheckArray(int[] array)
+    static bool IsArrayInDescendingOrder(int[] array)
     {
         for (int i = 0; i < array.Length - 1; i++)
         {
@@ -23,7 +23,7 @@ public class Program
             }
         }
 
-        return array;
+        return true;
     }
 
     static bool IsValidNumber(int number)
@@ -69,6 +69,7 @@ public class Program
         for (int i = 0; i < 10; i++)
         {
             int number = int.Parse(Console.ReadLine());
+
             try
             {
                 if (IsValidNumber(number))
@@ -84,7 +85,7 @@ public class Program
 
         try
         {
-            array = CheckArray(array);
+            IsArrayInDescendingOrder(array);
 
             Console.Write("1 < ");
 

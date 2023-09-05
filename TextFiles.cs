@@ -6,7 +6,7 @@ namespace TextFiles
     public class Program
     {
 
-        static void writeToTextFile(string fileName, string[] text)
+        static void WriteToTextFile(string fileName, string[] text)
         {
             //string[] text = { "New line 1", "New line 2", "New line 3", "New line 4", "New line 5" };
 
@@ -36,7 +36,7 @@ namespace TextFiles
             }
         }
 
-        static void readAllOddsLines(string fileName)
+        static void ReadAllOddsLines(string fileName)
         {
             string[] text = File.ReadAllLines(fileName);
 
@@ -49,7 +49,7 @@ namespace TextFiles
             }
         }
 
-        static void concatenateTwoTextFiles(string fileName1, string fileName2)
+        static void ConcatenateTwoTextFiles(string fileName1, string fileName2)
         {
             string[] textFromFile1 = File.ReadAllLines(fileName1);
             string[] textFromFile2 = File.ReadAllLines(fileName2);
@@ -61,7 +61,7 @@ namespace TextFiles
             writeToTextFile(filePath, textFromFiles);
         }
 
-        static void readTextFromFile(string fileName1, string fileName2)
+        static void ReadTextFromFile(string fileName1, string fileName2)
         {
             using (var reader = new StreamReader(fileName1))
             using (var writer = new StreamWriter(fileName2))
@@ -78,7 +78,7 @@ namespace TextFiles
             }
         }
 
-        static void compareTwoTextFiles(string fileName1, string fileName2)
+        static void CompareTwoTextFiles(string fileName1, string fileName2)
         {
             using (StreamReader reader1 = new StreamReader(fileName1))
             using (StreamReader reader2 = new StreamReader(fileName2))
@@ -98,7 +98,7 @@ namespace TextFiles
             }
         }
 
-        static void replaceWordInTextFile(string fileName)
+        static void ReplaceWordInTextFile(string fileName)
         {
             string word = Console.ReadLine();
             string wordToReplace = Console.ReadLine();
@@ -107,7 +107,7 @@ namespace TextFiles
             File.WriteAllText(fileName, text);
         }
 
-        static void deleteAllOddLinesFromTextFile(string fileName)
+        static void DeleteAllOddLinesFromTextFile(string fileName)
         {
             string line;
             int line_number = 0;
@@ -121,7 +121,9 @@ namespace TextFiles
                         line_number++;
 
                         if (line_number % 2 == 0)
+                        {
                             continue;
+                        }
 
                         writer.WriteLine(line);
                     }
@@ -139,7 +141,7 @@ namespace TextFiles
 
             try
             {
-                deleteAllOddLinesFromTextFile(filePath1);
+                DeleteAllOddLinesFromTextFile(filePath1);
             }
             catch (IOException ex)
             {
