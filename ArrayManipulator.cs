@@ -62,49 +62,44 @@ namespace ArrayManipulator
             return arrayResult;
         }
 
-        static int GetMaxIndex(int[] array, string words)
+        static int[] GetFilteredArray(int[] array, Predicate<int> filter, int size)
         {
-            int maxResultId = -1;
+            int[] filteredArray = new int[size];
+            int j = 0;
+
+            foreach (int num in array)
+            {
+                if (filter(num))
+                {
+                    filteredArray[j] = num;
+                    j++;
+                }
+            }
+
+            return filteredArray;
+        }
+
+        static int GetExtremumIndex(int[] array, Predicate<int> filter, string[] words)
+        {
+            int extremumResultId = -1;
             bool isOdd = words.Contains("odd");
 
             for (int i = 0; i < array.Length; i++)
             {
                 bool isCurrentValueValid = (isOdd && array[i] % 2 != 0) || (!isOdd && array[i] % 2 == 0);
 
-                if (isCurrentValueValid)
+                if (isCurrentValueValid && filter(array[i]))
                 {
-                    if (maxResultId == -1 || array[i] > array[maxResultId])
+                    if (extremumResultId == -1 || array[i] > array[extremumResultId])
                     {
-                        maxResultId = i;
+                        extremumResultId = i;
                     }
                 }
             }
 
-            return maxResultId;
+            return extremumResultId;
         }
-
-        static int GetMinIndex(int[] array, string[] words)
-        {
-            int minResultId = -1;
-            bool isOdd = words.Contains("odd");
-
-            for (int i = 0; i < array.Length; i++)
-            {
-                bool isCurrentValueValid = (isOdd && array[i] % 2 != 0) || (!isOdd && array[i] % 2 == 0);
-
-                if (isCurrentValueValid)
-                {
-                    if (minResultId == -1 || array[i] < array[minResultId])
-                    {
-                        minResultId = i;
-                    }
-                }
-            }
-
-            return minResultId;
-        }
-
-        static void PrintFirstsOfArray(int[] array, int count, string command)
+        static void PrintFirstsOrLastsOfArray(int[] array, int count, string command, bool isFirst)
         {
             if (count > array.Length)
             {
@@ -112,40 +107,13 @@ namespace ArrayManipulator
                 return;
             }
 
-            int[] arrayResult = new int[array.Length];
-            if (command.Contains("even"))
-            {
-                arrayResult = GetAllEvensFromArray(array, array.Length);
-            }
-            else if (command.Contains("odd"))
-            {
-                arrayResult = GetAllOddsFromArray(array, array.Length);
-            }
+            Predicate<int> filter = isFirst ? (int x) => x % 2 == 0 : (int x) => x % 2 != 0;
 
-            Console.WriteLine("[" + string.Join(", ", arrayResult.Take(count)) + "]");
+            int[] filteredArray = GetFilteredArray(array, filter, array.Length);
+            int[] resultArray = isFirst ? filteredArray.Take(count).ToArray() : filteredArray.Reverse().Take(count).Reverse().ToArray();
+
+            Console.WriteLine("[" + string.Join(", ", resultArray) + "]");
         }
-
-        static void PrintLastsOfArray(int[] array, int count, string command)
-        {
-            if (count > array.Length)
-            {
-                Console.WriteLine("Invalid count");
-                return;
-            }
-
-            int[] arrayResult = new int[array.Length];
-            if (command.Contains("even"))
-            {
-                arrayResult = GetAllEvensFromArray(array, array.Length);
-            }
-            else if (command.Contains("odd"))
-            {
-                arrayResult = GetAllOddsFromArray(array, array.Length);
-            }
-
-            Console.WriteLine("[" + string.Join(", ", arrayResult.Reverse().Take(count)) + "]");
-        }
-
         enum Operation
         {
             Exchange,
@@ -188,18 +156,18 @@ namespace ArrayManipulator
                             break;
                         case Operation.First:
                             count = int.Parse(words[1]);
-                            PrintFirstsOfArray(array, count, command);
+                            PrintFirstsOrLastsOfArray(array, count, command, true);
                             break;
                         case Operation.Last:
                             count = int.Parse(words[1]);
-                            PrintLastsOfArray(array, count, command);
+                            PrintFirstsOrLastsOfArray(array, count, command, false);
                             break;
                         case Operation.Max:
-                            int maxIndex = GetMaxIndex(array, command);
+                            int maxIndex = GetExtremumIndex(array, x => x % 2 == 0, words);
                             Console.WriteLine(maxIndex == -1 ? "No matches" : maxIndex);
                             break;
                         case Operation.Min:
-                            int minIndex = GetMinIndex(array, words);
+                            int minIndex = GetExtremumIndex(array, x => x % 2 == 0, words);
                             Console.WriteLine(minIndex == -1 ? "No matches" : minIndex);
                             break;
                         case Operation.End:
@@ -219,4 +187,3 @@ namespace ArrayManipulator
         }
     }
 }
-

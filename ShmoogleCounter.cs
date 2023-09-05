@@ -4,6 +4,32 @@ namespace ShmoogleCounter
 {
     class Program
     {
+
+        static void AddCountOfParameterToType(string word, ref int size, ref string[] str)
+        {
+            if (word.EndsWith(";") || word.EndsWith(")"))
+            {
+                str[size] = word.Substring(0, word.Length - 1);
+            }
+            else
+            {
+                str[size] = word;
+            }
+            size++;
+        }
+
+        static void PrintArray(string[] array, string name)
+        {
+            if (array.Length == 0)
+            {
+                Console.WriteLine($"{name}: None");
+            }
+            else
+            {
+                Console.WriteLine($"{name}: [{string.Join(", ", array)}]");
+            }
+        }
+
         static void Main(string[] avgs)
         {
             string input;
@@ -29,70 +55,17 @@ namespace ShmoogleCounter
                 {
                     if (words[i] == "double" || words[i].Contains("(double"))
                     {
-                        if (words[i + 1].EndsWith(";") || words[i + 1].EndsWith(")"))
-                        {
-                            doubles[doublesSize] = words[i + 1].Substring(0, words[i + 1].Length - 1);
-                        }
-                        else
-                        {
-                            doubles[doublesSize] = words[i + 1];
-                        }
-                        doublesSize++;
+                        AddCountOfParameterToType(words[i+1], ref doublesSize, ref doubles);
                     }
                     else if (words[i] == "int" || words[i].Contains("(int"))
                     {
-                        if (words[i + 1].EndsWith(";") || words[i + 1].EndsWith(")"))
-                        {
-                            doubles[intsSize] = words[i + 1].Substring(0, words[i + 1].Length - 1);
-                        }
-                        else
-                        {
-                            ints[intsSize] = words[i + 1];
-                        }
-                        intsSize++;
+                        AddCountOfParameterToType(words[i+1], ref intsSize, ref ints);
                     }
                 }
             }
 
-            if (doublesSize == 0)
-            {
-                Console.WriteLine("Doubles: None");
-            }
-            else
-            {
-                Console.Write("Doubles: ");
-                for (int i = 0; i < doublesSize; i++)
-                {
-                    if (i == doublesSize - 1)
-                    {
-                        Console.WriteLine(doubles[i]);
-                    }
-                    else
-                    {
-                        Console.Write(doubles[i] + ", ");
-                    }
-                }
-            }
-
-            if (intsSize == 0)
-            {
-                Console.WriteLine("Ints: None");
-            }
-            else
-            {
-                Console.Write("Ints: ");
-                for (int i = 0; i < intsSize; i++)
-                {
-                    if (i == intsSize - 1)
-                    {
-                        Console.WriteLine(ints[i]);
-                    }
-                    else
-                    {
-                        Console.Write(ints[i] + ", ");
-                    }
-                }
-            }
+            PrintArray(ints, "Ints");
+            PrintArray(doubles, "Doubles: ");
         }
     }
 }
