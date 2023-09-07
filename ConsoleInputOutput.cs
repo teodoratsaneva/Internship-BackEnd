@@ -131,9 +131,9 @@ namespace ConsoleInputOutput
             Console.WriteLine(count);
         }
 
-        static void Main(string[] args)
-        {
-            DisplaySumOfNNumbers();
-        }
+        // static void Main(string[] args)
+        // {
+        //     DisplaySumOfNNumbers();
+        // }
     }
 }
