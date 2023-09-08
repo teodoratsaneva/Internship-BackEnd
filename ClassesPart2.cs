@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Point;
+using System.Reflection;
 
 namespace Point
 {
@@ -389,6 +389,23 @@ namespace Point
         }
     }
 
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Interface | AttributeTargets.Enum | AttributeTargets.Method)]
+    public class VersionAttribute : Attribute
+    {
+        public string Version { get; }
+
+        public VersionAttribute(string version)
+        {
+            Version = version;
+        }
+    }
+
+    [Version("2.11")]
+    public class SampleClass
+    {
+        
+    }
+
     public class Program
     {
         static void Main(string[] args)
@@ -435,6 +452,12 @@ namespace Point
 
             bool isNonZero = productMatrix.IsNonZero();
             Console.WriteLine(isNonZero);
+
+            Type type = typeof(SampleClass);
+            var versionAttribute = type.GetCustomAttribute<VersionAttribute>();
+
+            Console.WriteLine(versionAttribute.Version);
+
         }
     }
 }
