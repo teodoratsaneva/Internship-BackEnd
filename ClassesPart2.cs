@@ -46,7 +46,7 @@ namespace Point
             points.Add(point);
         }
 
-        public int GetSize
+        public int Size
         {
             get { return points.Count; }
         }
@@ -82,8 +82,9 @@ namespace Point
             {
                 while (!reader.EndOfStream)
                 {
+                    const int countOfElements = 3;
                     string[] parts = reader.ReadLine().Split(' ');
-                    if (parts.Length == 3 &&
+                    if (parts.Length == countOfElements &&
                         double.TryParse(parts[0], out double x) &&
                         double.TryParse(parts[1], out double y) &&
                         double.TryParse(parts[2], out double z))
