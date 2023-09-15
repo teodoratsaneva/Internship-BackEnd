@@ -154,6 +154,7 @@ namespace GenericType
             return minElement;
         }
 
+
         public T GetMax()
         {
             if (size == 0)

@@ -102,21 +102,21 @@ namespace Point
 
     public class Program
     {
-        // static void Main(string[] args)
-        // {
-        //     Point3D pointA = new Point3D(2, 2, 3);
-        //     Point3D pointB = new Point3D(1, 4, 6);
+        static void Main(string[] args)
+        {
+            Point3D pointA = new Point3D(2, 2, 3);
+            Point3D pointB = new Point3D(1, 4, 6);
 
-        //     Path path = new Path();
+            Path path = new Path();
 
-        //     path.AddPointToPath(pointA);
-        //     path.AddPointToPath(pointB);
+            path.AddPointToPath(pointA);
+            path.AddPointToPath(pointB);
 
-        //     Console.WriteLine(path.ToString());
+            Console.WriteLine(path.ToString());
 
-        //     Console.WriteLine(Distance.GetDistance(pointA, pointB));
+            Console.WriteLine(Distance.GetDistance(pointA, pointB));
 
-        //     PathStorage.SavePathToFile(path, "text.txt");
-        // }
+            PathStorage.SavePathToFile(path, "text.txt");
+        }
     }
 }

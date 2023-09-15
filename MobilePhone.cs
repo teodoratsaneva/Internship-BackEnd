@@ -292,7 +292,7 @@ namespace MobilePhone
                 Console.WriteLine(phone.ToString());
             }
 
-            Console.WriteLine(gsmArray[2].CalculateCallPrice(0.37f));
+            Console.WriteLine(gsmArray[2].CalculateCallPrice(0.37f));     
         }
     }
 }
