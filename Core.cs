@@ -1,4 +1,5 @@
 using System;
+using System.Dynamic;
 using System.Runtime.InteropServices;
 
 namespace LambdaCore
@@ -13,9 +14,17 @@ namespace LambdaCore
     public class Core
     {
         public TypeCore type;
-        private char coreName;
+        private string coreName;
         private int durability;
-        public List<Fragment> fragments = new List<Fragment>();
+        private List<Fragment> fragments = new List<Fragment>();
+
+        private bool isCritical = false;
+
+        public bool IsCritical
+        {
+            get { return isCritical; }
+            set { isCritical = value; }
+        }
 
         public int Durability
         {
@@ -24,7 +33,7 @@ namespace LambdaCore
             {
                 if (value < 0)
                 {
-                    throw new InvalidOperationException("Durability cannotbe negative");
+                    throw new ArgumentException();
                 }
 
                 if (Type == TypeCore.SystemCore)
@@ -37,7 +46,7 @@ namespace LambdaCore
                 }
                 else
                 {
-                    throw new InvalidOperationException("Invaild Operation");
+                    throw new ArgumentException();
                 }
             }
         }
@@ -49,25 +58,31 @@ namespace LambdaCore
             {
                 if (value != TypeCore.ParaCore && value != TypeCore.SystemCore)
                 {
-                    throw new InvalidOperationException("Incorrect type of core");
+                    throw new ArgumentException();
                 }
 
                 type = value;
             }
         }
 
-        public char CoreName
+        public List<Fragment> Fragments
+        {
+            get { return fragments; }
+            set { fragments = value; }
+        }
+
+        public string CoreName
         {
             get { return coreName; }
             set
             {
-                if (value >= 'A' && value <= 'Z')
+                if (String.Compare(value, "A") >= 0 && String.Compare(value, "Z") <= 0)
                 {
                     coreName = value;
                 }
                 else
                 {
-                    throw new InvalidOperationException("Name must be capital letter");
+                    throw new ArgumentException();
                 }
             }
         }
@@ -77,11 +92,34 @@ namespace LambdaCore
             Type = TypeCore.SystemCore;
         }
 
-        public Core(TypeCore type, char coreName, int durability)
+        public Core(TypeCore type, string coreName, int durability)
         {
-            Type = type;
-            CoreName = coreName;
-            Durability = durability;
+            try
+            {
+                Type = type;
+            }
+            catch (ArgumentException)
+            {
+                Console.WriteLine("Incorrect type of core");
+            }
+
+            try
+            {
+                CoreName = coreName;
+            }
+            catch (ArgumentException)
+            {
+                Console.WriteLine("Name must be capital letter");
+            }
+
+            try
+            {
+                Durability = durability;
+            }
+            catch (ArgumentException)
+            {
+                Console.WriteLine("Incorrect operation");
+            }
         }
 
         public void AddFragment(Fragment fragment)
@@ -94,25 +132,58 @@ namespace LambdaCore
             fragments.Remove(fragment);
         }
 
-        public void UpdatePressure()
+        // public void UpdatePressure()
+        // {
+        //     int pressure = 0;
+
+        //     foreach (var fragment in fragments)
+        //     {
+        //         if (fragment.Type == FragmentType.CoolingFragment)
+        //             pressure -= fragment.PressureAffection;
+        //         else if (fragment.Type == FragmentType.NuclearFragment)
+        //             pressure += fragment.PressureAffection;
+        //     }
+
+        //     if (pressure > 0)
+        //     {
+        //         Durability -= pressure;
+        //     }
+        //     else
+        //     {
+        //         Durability += Math.Abs(pressure);
+        //     }
+
+        //     if (Durability <= 0)
+        //     {
+        //         IsCritical = true;
+        //     }
+        // }
+
+        public void IncreasePressure(int value)
         {
-            int pressure = 0;
-
-            foreach (var fragment in fragments)
-            {
-                if (fragment.Type == FragmentType.CoolingFragment)
-                    pressure -= fragment.PressureAffection;
-                else if (fragment.Type == FragmentType.NuclearFragment)
-                    pressure += fragment.PressureAffection;
-            }
-
+            int pressure = 0; 
+            pressure += value;
             if (pressure > 0)
             {
                 Durability -= pressure;
+                if (Durability <= 0)
+                {
+                    IsCritical = true;
+                }
             }
-            else
+        }
+
+        public void DecreasePressure(int value)
+        {
+            int pressure = 0;
+            pressure -= value;
+            if (pressure < 0)
             {
-                Durability += Math.Abs(pressure);
+                pressure = 0;
+            }
+            if (Durability <= 0)
+            {
+                IsCritical = true;
             }
         }
 

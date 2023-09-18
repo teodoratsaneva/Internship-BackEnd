@@ -2,22 +2,88 @@ using System;
 
 namespace LambdaCore
 {
-        public class Program
+    public class Program
     {
         static void Main(string[] args)
         {
-            Core core1 = new Core(TypeCore.SystemCore, 'A', 100);
-            Fragment nuclearFragment1 = new Fragment(FragmentType.NuclearFragment, "N1", 10);
-            Fragment coolingFragment1 = new Fragment(FragmentType.CoolingFragment, "C1", 5);
+            PowerPlant powerPlant = new PowerPlant();
+            string input;
+            while ((input = Console.ReadLine()) != "System Shutdown!")
+            {
+                string[] commandArgs = input.Split(':');
+                string command = commandArgs[0];
+                string[] parameters = commandArgs[1].Split('@');
 
-            core1.AddFragment(nuclearFragment1);
-            core1.AddFragment(coolingFragment1);
+                switch (command)
+                {
+                    case "CreateCore":
+                        string type = parameters[1];
+                        int durability = int.Parse(parameters[2]);
+                        try
+                        {
+                            powerPlant.CreateCore(type, durability);
+                        }
+                        catch (ArgumentException)
+                        {
+                            Console.WriteLine("Failed to create Core!");
+                        }
+                        break;
 
-            core1.RemoveFragment(nuclearFragment1);
-            
-            core1.UpdatePressure();
+                    case "RemoveCore":
+                        string name = parameters[1];
+                        try
+                        {
+                            powerPlant.RemoveCore(name);
+                        }
+                        catch (ArgumentException)
+                        {
+                            Console.WriteLine($"Failed to remove Core {name}!");
+                        }
+                        break;
 
-            Console.WriteLine(core1.ToString());
+                    case "SelectCore":
+                        string selectedCoreName = parameters[1];
+                        try
+                        {
+                            powerPlant.SelectCore(selectedCoreName);
+                        }
+                        catch (ArgumentException)
+                        {
+                            Console.WriteLine($"Failed to select Core {selectedCoreName}!");
+                        }
+                        break;
+
+                    case "AttachFragment":
+                        string fragmentType = parameters[1];
+                        string fragmentName = parameters[2];
+                        int pressureAffection = int.Parse(parameters[3]);
+                        try
+                        {
+                            powerPlant.AttachFragment(fragmentName, pressureAffection, fragmentType);
+                        }
+                        catch (ArgumentException)
+                        {
+                            Console.WriteLine($"Failed to attach Fragment {fragmentName}!");
+                        }
+                        break;
+
+                    case "DetachFragment":
+                        try
+                        {
+                            powerPlant.DetachFragment();
+                        }
+                        catch (ArgumentException)
+                        {
+                            Console.WriteLine("Failed to detach Fragment!");
+                        }
+                        break;
+
+                    case "Status":
+                        powerPlant.PrintStatus();
+                        break;
+                }
+            }
         }
+
     }
 }

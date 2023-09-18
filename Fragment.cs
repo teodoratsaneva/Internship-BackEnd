@@ -2,7 +2,7 @@
 using System;
 using Microsoft.VisualBasic;
 
-namespace LambdaCore
+namespace LambdaCore 
 {
     public enum FragmentType
     {
