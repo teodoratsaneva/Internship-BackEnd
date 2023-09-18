@@ -81,6 +81,10 @@ namespace LambdaCore
                     case "Status":
                         powerPlant.PrintStatus();
                         break;
+
+                    default:
+                        Console.WriteLine("Invalid command! Please try again!");
+                        break;
                 }
             }
         }
