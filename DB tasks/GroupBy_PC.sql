@@ -40,13 +40,11 @@ FROM PC
 GROUP BY SPEED;
 
 --7--
-SELECT MAKER, number_of_pc
-FROM 
-(SELECT MAKER, COUNT(DISTINCT code) AS number_of_pc
+SELECT MAKER, alias1
 FROM product
 JOIN pc ON product.model = pc.model
-GROUP BY MAKER) AS maker_pcs
-WHERE number_of_pc >= 3;
+WHERE (SELECT COUNT(code) AS alias1 from pc) > 3
+GROUP BY MAKER;
 
 --8--
 SELECT TOP 1 MAKER, MAX(PRICE)
@@ -69,4 +67,3 @@ WHERE MAKER IN
 FROM PRODUCT
 WHERE TYPE = 'Printer')
 GROUP BY MAKER;
-
