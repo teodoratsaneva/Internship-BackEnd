@@ -1,14 +1,16 @@
 CREATE TABLE Users (
-  id INT PRIMARY KEY,
-  email VARCHAR(255) UNIQUE NOT NULL,
-  password VARCHAR(255) NOT NULL,
-  registration_date DATE NOT NULL
+    id INT IDENTITY (1, 1) PRIMARY KEY,
+    email VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    date DATE
 );
 
-INSERT INTO Users (id, email, password, registration_date) VALUES
-(1, 'teddy@example.com', '123456', '2023-10-10'),
-(2, 'asq@example.com', '12nm345', '2023-10-09'),
-(3, 'alex3@example.com', 'password234', '2023-09-30');
+
+INSERT INTO Users (email, password, date) VALUES
+('teddy@example.com', '123456', '2023-10-10'),
+('asq@example.com', '12nm345', '2023-10-09'),
+('alex3@example.com', 'password234', '2023-09-30');
+
 
 CREATE TABLE Friends (
   user_id1 INT NOT NULL,
@@ -24,10 +26,10 @@ INSERT INTO Friends (user_id1, user_id2) VALUES
 (2, 3);
 
 CREATE TABLE Walls (
-  user_id INT NOT NULL,
-  author_id INT NOT NULL,
-  message TEXT NOT NULL,
-  post_date DATE NOT NULL
+  user_id INT PRIMARY KEY,
+  author_id INT ,
+  message TEXT,
+  post_date DATE
 );
 
 INSERT INTO Walls (user_id, author_id, message, post_date) VALUES
@@ -60,3 +62,8 @@ INSERT INTO GroupMembers (group_id, user_id) VALUES
 (2, 3),
 (3, 1),
 (3, 2);
+
+
+DELETE FROM Users WHERE id = 1;
+
+DROP TABLE GroupMembers;
